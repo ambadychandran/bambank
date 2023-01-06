@@ -49,7 +49,7 @@ models.sequelize.sync().then(function() {
 });
 
 //Routes
-var authRoute = require('./app/routes/auth.js')(app,passport);
+var authRoute = require('./app/routes/router.js')(app,passport);
 
 // app.get('/', function (req, res) {
 //     res.send('Welcome to Bambank');

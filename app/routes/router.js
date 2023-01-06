@@ -1,7 +1,8 @@
 var authController = require('../controllers/authController.js');
+var dashController = require('../controllers/dashController.js');
 
 module.exports = function (app, passport) {
-    app.get('/',isLoggedIn, authController.dashboard);
+    app.get('/',isLoggedIn, dashController.dashboard);
     app.get('/signup', authController.signup);
     app.get('/signin', authController.signin);
     app.post('/signup', passport.authenticate('local-signup', {
@@ -10,7 +11,7 @@ module.exports = function (app, passport) {
     }
 
     ));
-    app.get('/dashboard',isLoggedIn, authController.dashboard);
+    app.get('/dashboard',isLoggedIn, dashController.dashboard);
     app.get('/logout',authController.logout);
     app.post('/signin', passport.authenticate('local-signin', {
         successRedirect: '/dashboard',
