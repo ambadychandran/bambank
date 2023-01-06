@@ -29,14 +29,6 @@ app.use(passport.session());
 //Models
 var models = require("./app/models");
 
-// load the handlebars middlewear
-// app.use(hbs.middleware({
-//     viewPath: path.resolve(__dirname, './app/views'),
-//     layoutsPath: path.resolve(__dirname, './app/views/layouts'),
-//     defaultLayout: 'main'
-//   }))
-
-
 //For Handlebars
 app.set('views', './app/views');
 app.engine('hbs', exphbs.engine({
@@ -46,8 +38,8 @@ app.engine('hbs', exphbs.engine({
 }));
 app.set('view engine', '.hbs');
 
-//Routes
-var authRoute = require('./app/routes/auth.js')(app);
+//load passport strategies
+require('./app/config/passport/passport.js')(passport, models.user);
 
 //Sync Database
 models.sequelize.sync().then(function() {
@@ -55,6 +47,9 @@ models.sequelize.sync().then(function() {
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database");
 });
+
+//Routes
+var authRoute = require('./app/routes/auth.js')(app,passport);
 
 app.get('/', function (req, res) {
     res.send('Welcome to Bambank');
