@@ -51,9 +51,9 @@ models.sequelize.sync().then(function() {
 //Routes
 var authRoute = require('./app/routes/auth.js')(app,passport);
 
-app.get('/', function (req, res) {
-    res.send('Welcome to Bambank');
-});
+// app.get('/', function (req, res) {
+//     res.send('Welcome to Bambank');
+// });
 app.listen(5000, function (err) {
     if (!err)
         console.log("application running");
