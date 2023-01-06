@@ -5,7 +5,13 @@ module.exports = function(sequelize, Sequelize) {
             primaryKey: true,
             type: Sequelize.INTEGER
         },
-        balance: {
+        reciverid: {
+            type: Sequelize.UUID
+        },
+        senderid: {
+            type: Sequelize.UUID
+        },
+        amount: {
             type: Sequelize.BIGINT,
             allowNull: false
         },
@@ -13,6 +19,10 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.DATE,
             defaultValue: new Date(),
             allowNull: false
+        },
+        status: {
+            type: Sequelize.STRING,
+            notEmpty: true
         }
     });
     return User;

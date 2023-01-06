@@ -20,30 +20,9 @@ Object.keys(db).forEach(function (modelName) {
     }
 });
 
-db.transactions.belongsTo(db.user, { as: 'sender' })
-db.transactions.belongsTo(db.user, { as: 'receiver' })
-db.user.belongsToMany(db.transactions, { through: 'usertransactions' })
-
-// Extra Hooks
+// Hook to credit bonus after sign in
 db.user.addHook('afterCreate', (user) => {
-    db.transactions.create({ balance: 100,receiverIdentifier: user.identifier })
-  })
-
-// Extra Hooks
-// Balance shouldn't actually be a direct property of users but a calculated and cached one. For now though, this is fine
-db.transactions.addHook('afterCreate', (transactions) => {
-db.user.findOne(
-    { where: { identifier: transactions.receiverIdentifier } }
-).then(user =>
-    user.addTransfer(transactions)
-)
-if (transactions.senderIdentifier) {
-    db.user.findOne(
-    { where: { identifier: transactions.senderIdentifier } }
-    ).then(user =>
-    user.addTransfer(transactions)
-    )
-}
+    db.transactions.create({ amount: 100,reciverid: user.id,status:'credit'})
 })
 
 db.sequelize = sequelize;
