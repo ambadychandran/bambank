@@ -18,8 +18,8 @@
 				Balance
 			</div>
 			<div class="card-body">
-				<h5 class="card-title">Special title treatment</h5>
-				<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				<h5 class="card-title"> {{balance}} </h5>
+				<p class="card-text">Bambeuros</p>
 			</div>
 		</div>
     </div>
@@ -29,8 +29,17 @@
 				Transfer
 			</div>
 			<div class="card-body">
-				<h5 class="card-title">Special title treatment</h5>
-				<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				 <form  method="post">
+					<div class="form-group">
+						<label for="email">Recipient email address</label>
+						<input type="email" class="form-control" name="email" required>
+					</div>
+					<div class="form-group">
+						<label for="amount">Amount to Transfer</label>
+						<input type="number" class="form-control" name="amount" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
 			</div>
 		</div>
     </div>
@@ -40,8 +49,26 @@
 				Transactions
 			</div>
 			<div class="card-body">
-				<h5 class="card-title">Special title treatment</h5>
-				<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				<div class="col-md-3">
+					<table class="table">
+						<thead>
+							<tr>
+							<th scope="col">#</th>
+							<th scope="col">Amount</th>
+							<th scope="col">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each transactions}}
+								<tr>
+								<th scope="row">{{this.id}}</th>
+								<td>{{this.amount}}</td>
+								<td>{{this.formatted_date}}</td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>
+                </div>
 			</div>
 		</div>
     </div>

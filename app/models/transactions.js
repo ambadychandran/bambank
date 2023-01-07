@@ -1,5 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
-    var User = sequelize.define('transactions', {
+    var Transactions = sequelize.define('transactions', {
         id: {
             autoIncrement: true,
             primaryKey: true,
@@ -19,11 +19,7 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.DATE,
             defaultValue: new Date(),
             allowNull: false
-        },
-        status: {
-            type: Sequelize.STRING,
-            notEmpty: true
         }
     });
-    return User;
+    return Transactions;
 }
